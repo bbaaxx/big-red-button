@@ -1,0 +1,31 @@
+{
+  "name": "webpack2-from-scratch",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "build": "webpack",
+    "start": "webpack-dev-server"
+  },
+  "dependencies": {
+    "babel-loader": "^7.0.0",
+    "snabbdom": "^0.6.9"
+  },
+  "devDependencies": {
+    "babel-core": "^6.24.1",
+    "babel-eslint": "^7.2.3",
+    "babel-plugin-transform-es2015-destructuring": "^6.23.0",
+    "babel-plugin-transform-object-rest-spread": "^6.23.0",
+    "babel-preset-env": "^1.5.1",
+    "buble-loader": "^0.4.1",
+    "eslint": "^3.19.0",
+    "eslint-plugin-react": "^7.0.1",
+    "html-webpack-plugin": "^2.28.0",
+    "stylelint": "^7.10.1",
+    "tape": "^4.6.3",
+    "webpack": "^2.6.1",
+    "webpack-dev-server": "^2.4.5",
+    "webpack-manifest-plugin": "^1.1.0",
+    "webpack-merge": "^4.1.0"
+  }
+}

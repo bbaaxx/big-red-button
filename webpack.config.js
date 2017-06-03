@@ -16,11 +16,24 @@ const baseConfig = {
     module: {
         rules: [
             {
+                enforce: 'pre',
                 test: /\.(js|jsx)$/,
                 exclude: path.resolve(__dirname, "node_modules"),
-                use: {
-                  loader: 'babel-loader'
-                }
+                use: [
+                  {
+                    loader: 'eslint-loader',
+                    options: {
+                      failOnError: true
+                    }
+                  }
+                ]
+            },
+            {
+                test: /\.(js|jsx)$/,
+                exclude: path.resolve(__dirname, "node_modules"),
+                use: [
+                  {loader: 'babel-loader'},
+                ]
             }
         ]
     },
@@ -38,8 +51,10 @@ const baseConfig = {
     devServer: {
       contentBase: path.join(__dirname, "dist"),
       compress: true,
+      overlay: true,
       port: 3010
-    }
+    },
+    devtool: 'cheap-eval-source-map'
 }
 
 let targets = [

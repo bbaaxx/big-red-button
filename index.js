@@ -4,10 +4,11 @@ const rootElement = document.body.appendChild(
 );
 
 const renderSomething = (elem, something) => {
-  elem.innerHTML = something; // eslint-disable-line no-param-reassign
+  // eslint-disable-next-line no-param-reassign
+  elem.innerHTML = something;
 };
 
 document.addEventListener(
   'DOMContentLoaded',
-  () => renderSomething(rootElement, 'Yolotl'),
+  () => renderSomething(rootElement, 'Yolotli'),
 );

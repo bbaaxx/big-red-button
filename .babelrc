@@ -1,4 +1,9 @@
 {
   "presets": ["env"],
-  "plugins": ["transform-es2015-destructuring", "transform-object-rest-spread"]
+  "plugins": [
+    "transform-flow-comments",
+    "transform-object-rest-spread",
+    "transform-es2015-destructuring",
+    "transform-class-properties"
+  ]
 }

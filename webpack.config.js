@@ -9,16 +9,22 @@ const nodeModulesPath = path.resolve(__dirname, 'node_modules');
 
 const baseConfig = {
   entry: {
-    // libs: './libs.js',
-    main: './index.js',
+    jsLibs: './src/libs.js',
+    styleLibs: './src/styles/libs.scss',
+    main: './src/index.js',
+    styles: [
+      './src/styles/sass.scss',
+      './src/styles/sugarss.sss',
+      './src/styles/cssnext.css',
+    ],
   },
   output: {
     filename: '[name].[chunkhash].js',
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(__dirname, '/dist'),
   },
   module: {
     rules: [
-      {
+      { // eslint
         enforce: 'pre',
         test: /\.(js|jsx)$/,
         exclude: nodeModulesPath,
@@ -31,22 +37,54 @@ const baseConfig = {
           },
         ],
       },
-      {
+      { // es6 and jsx
         test: /\.(js|jsx)$/,
         exclude: nodeModulesPath,
         use: [
           { loader: 'babel-loader' },
         ],
       },
-      {
+      { // sass
+        test: /\.(sass|scss)$/,
+        use: [
+          { loader: 'style-loader' },
+          { loader: 'css-loader' },
+          { loader: 'resolve-url-loader' },
+          { loader: 'postcss-loader', options: { sourceMap: true } },
+          { loader: 'sass-loader?sourceMap' },
+        ],
+        exclude: /node_modules/,
+      },
+      { // mdl
+        test: require.resolve('material-design-lite/material'),
+        loader: 'exports-loader?componentHandler',
+      },
+      { // sugarss
+        test: /\.sss$/,
+        use: [
+          { loader: 'style-loader' },
+          { loader: 'css-loader' },
+          { loader: 'postcss-loader', options: { parser: 'sugarss' } },
+        ],
+      },
+      { // cssnext
         test: /\.css$/,
         use: [
           { loader: 'style-loader' },
           { loader: 'css-loader' },
           { loader: 'postcss-loader' },
-        ]
+        ],
+      },
+      { // fonts
+        test: /\.(woff|woff2|eot|ttf|otf)$/,
+        use: [
+          'file-loader?name=fonts/[name].[ext]',
+        ],
       },
     ],
+  },
+  resolve: {
+    modules: ['node_modules'],
   },
   plugins: [
     new FlowBabelWebpackPlugin(),
@@ -72,15 +110,14 @@ const baseConfig = {
 const targets = [
   // 'web', 'webworker', 'node', 'async-node', 'node-webkit', 'electron-main'
   'web',
-].map((target) => {
-  const base = webpackMerge(baseConfig, {
+].map(target => (
+  webpackMerge(baseConfig, {
     target,
     output: {
-      path: path.resolve(`${__dirname}dist/${target}`),
+      path: path.resolve(`${__dirname}/dist/${target}`),
       filename: `[name].${target}.js`,
     },
-  });
-  return base;
-});
+  })
+));
 
 module.exports = targets;

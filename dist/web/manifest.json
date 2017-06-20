@@ -3,6 +3,8 @@
   "fonts/MaterialIcons-Regular.ttf": "fonts/MaterialIcons-Regular.ttf",
   "fonts/MaterialIcons-Regular.woff": "fonts/MaterialIcons-Regular.woff",
   "fonts/MaterialIcons-Regular.woff2": "fonts/MaterialIcons-Regular.woff2",
+  "jsLibs.js": "jsLibs.web.js",
   "main.js": "main.web.js",
+  "styleLibs.js": "styleLibs.web.js",
   "styles.js": "styles.web.js"
 }

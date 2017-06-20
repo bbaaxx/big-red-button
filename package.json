@@ -5,7 +5,8 @@
   "license": "MIT",
   "scripts": {
     "build": "rimraf ./dist && webpack",
-    "start": "webpack-dev-server"
+    "start": "NODE_ENV=development webpack-dev-server",
+    "test": "jest --config ./.jestconfig.json"
   },
   "dependencies": {
     "material-design-icons": "^3.0.1",
@@ -15,6 +16,7 @@
   "devDependencies": {
     "babel-core": "^6.24.1",
     "babel-eslint": "^7.2.3",
+    "babel-jest": "^20.0.3",
     "babel-loader": "^7.0.0",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-plugin-transform-es2015-destructuring": "^6.23.0",

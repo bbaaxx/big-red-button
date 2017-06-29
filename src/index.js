@@ -2,29 +2,37 @@
 // import './styles/index.css';
 import componentHandler from 'material-design-lite/material';
 
+// const rootElement = document.body.appendChild(
+//   (() => document.createElement('div'))(),
+// );
+
 const rootElement = document.body.appendChild(
-  (() => document.createElement('div'))(),
+  document.createElement('div'),
 );
 
-const renderSomething = (elem, something) => {
-  // eslint-disable-next-line no-param-reassign
-  elem.innerHTML = something;
-  setTimeout(() => {
-    const delayedElem = document.createElement('button');
-    delayedElem.innerHTML = 'delayed';
-    delayedElem.classList.add(
-      'mdl-button',
-      'mdl-js-button',
-      'mdl-button--raised',
-      'mdl-js-ripple-effect',
-      'mdl-button--accent',
-    );
-    elem.appendChild(delayedElem);
-    componentHandler.upgradeElement(delayedElem);
-  }, 3000);
+const getMdlButton = (buttonText) => {
+  const button = document.createElement('button');
+  const classList = [
+    'mdl-button',
+    'mdl-js-button',
+    'mdl-button--raised',
+    'mdl-js-ripple-effect',
+  ];
+  button.innerText = buttonText || 'button';
+  button.classList.add(...classList);
+  return button;
 };
 
-const content = `
+const renderSomething = (elem, something) => {
+  elem.innerHTML = something;   // eslint-disable-line no-param-reassign
+  const button = getMdlButton('Yolo!');
+  setTimeout(() => {
+    elem.appendChild(button);
+    componentHandler.upgradeElement(button);
+  }, 1500);
+};
+
+const htmlContent = `
   <p>Public demo MDL Wp2Sk</p>
   <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
     Button
@@ -39,5 +47,5 @@ const content = `
 
 document.addEventListener(
   'DOMContentLoaded',
-  () => renderSomething(rootElement, content),
+  () => renderSomething(rootElement, htmlContent),
 );

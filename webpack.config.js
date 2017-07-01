@@ -24,6 +24,11 @@ const baseConfig = {
   },
   module: {
     rules: [
+      {
+        test: /\.shim\.js$/,
+        use: ['script-loader'],
+        exclude: nodeModulesPath,
+      },
       { // eslint
         enforce: 'pre',
         test: /\.(js|jsx)$/,

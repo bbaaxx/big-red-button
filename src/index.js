@@ -1,15 +1,11 @@
-/* global document */
+/* global document, customElements */
 // import './styles/index.css';
-import componentHandler from 'material-design-lite/material';
-
-// const rootElement = document.body.appendChild(
-//   (() => document.createElement('div'))(),
-// );
+// import componentHandler from 'material-design-lite/material';
+import AmazingButton from './app/amazing-button';
 
 const rootElement = document.body.appendChild(
   document.createElement('div'),
 );
-
 const getMdlButton = (buttonText) => {
   const button = document.createElement('button');
   const classList = [
@@ -22,16 +18,14 @@ const getMdlButton = (buttonText) => {
   button.classList.add(...classList);
   return button;
 };
-
 const renderSomething = (elem, something) => {
   elem.innerHTML = something;   // eslint-disable-line no-param-reassign
   const button = getMdlButton('Yolo!');
   setTimeout(() => {
     elem.appendChild(button);
-    componentHandler.upgradeElement(button);
+    // componentHandler.upgradeElement(button);
   }, 1500);
 };
-
 const htmlContent = `
   <p>Public demo MDL Wp2Sk</p>
   <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
@@ -43,7 +37,10 @@ const htmlContent = `
   <button class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored">
     <i class="material-icons">mood</i>
   </button>
+  <amazing-button data-text="Amazing Button"></amazing-button>
 `;
+
+customElements.define('amazing-button', AmazingButton);
 
 document.addEventListener(
   'DOMContentLoaded',

@@ -15,19 +15,20 @@ pressed.
 * ES6/2017/next/over9k/whatever via Babel.
 * Sadistic eslint/flow setup (Yes, you are the masochist).
 * Jest for that fucking test ...
-* Sugarss/SASS/cssnext suport out of the box ... simultaneously(1).
-* Dockerfile that runs flow... a pain in the butt to get to work.
+* Sugarss/SASS/cssnext support out of the box ... simultaneously(1).
+* Dockerfile that runs flow... it was a pain in the ass to get to work.
 * Material Design Lite.
 
 ### How to set it up? ###
 
+- Use linux/mac
 - Install git
 - Install yarn
 - Clone this repo
 - `cd` in there
 - Install stuff running `yarn`
 - Run one of the following: `vim .`, `atom .`, `subl .`, or even `emacs . # I'm guessing here`
-- Run `yarn dev`. If you are lazy enough to use this then you may want to know that if you do `yarn dev -- --open` instead, it will open your favorite browser automagically!.
+- Run `yarn dev`. (If you are lazy enough to use this then you may want to know that if you do `yarn dev -- --open` instead, it will open your favorite browser automagically!)
 - Rejoice.
 
 ### Contribution guidelines ###

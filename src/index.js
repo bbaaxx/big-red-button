@@ -1,23 +1,38 @@
 /* global document, customElements */
-import componentHandler from 'material-design-lite/material';
+// import 'hammerjs';
 import AmazingButton from './app/wood/amazing-button';
 
 const rootElement = document.body.appendChild(
   document.createElement('div'),
 );
 
+const setEventListener = (ele) => {
+  ele.addEventListener('amazing-button-clicked', (e) => {
+    // Do something with the button click
+    console.log('amazing-button event catched', e.target.dataset.name);
+  });
+};
+
 const renderSomething = (elem, something) => {
   elem.innerHTML = something;   // eslint-disable-line no-param-reassign
-  // const button = getMdlButton('Yolo!');
-  const button = document.createElement('amazing-button');
-  button.dataset.text = 'hello dolly';
+  const allTheButtons = document.querySelectorAll('amazing-button');
+  allTheButtons.forEach(button => setEventListener(button));
+};
 
+const insertDelayedButton = (elem) => {
+  const delayedButton = document.createElement('amazing-button');
+  delayedButton.innerText = 'Delayed Button';
+  delayedButton.dataset.name = 'delayed-button';
+  delayedButton.dataset.colored = true;
+  delayedButton.dataset.ripple = true;
   setTimeout(() => {
-    elem.appendChild(button);
-    componentHandler.upgradeElement(button);
+    elem.appendChild(delayedButton);
+    setEventListener(delayedButton);
   }, 1500);
 };
+
 const htmlContent = `
+  <h1>Webpack 2 overbloated setup</h1>
   <p>Public demo MDL Wp2Sk</p>
   <amazing-button
     data-name="an-amazing-button"
@@ -44,9 +59,13 @@ const htmlContent = `
     ></amazing-button>
 `;
 
+
 customElements.define('amazing-button', AmazingButton);
 
 document.addEventListener(
   'DOMContentLoaded',
-  () => renderSomething(rootElement, htmlContent),
+  () => {
+    renderSomething(rootElement, htmlContent);
+    insertDelayedButton(rootElement);
+  },
 );

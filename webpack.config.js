@@ -12,11 +12,11 @@ const baseConfig = {
     jsLibs: './src/libs.js',
     styleLibs: './src/styles/libs.scss',
     main: './src/index.js',
-    // styles: [
-    //   './src/styles/sass.scss',
-    //   './src/styles/sugarss.sss',
-    //   './src/styles/cssnext.css',
-    // ],
+    styles: [
+      './src/styles/sass.scss',
+      './src/styles/sugarss.sss',
+      './src/styles/cssnext.css',
+    ],
   },
 
   output: {
@@ -56,7 +56,7 @@ const baseConfig = {
         loader: 'exports-loader?componentHandler',
       },
       { // Style libs imports
-        test: /src\/styles\/libs\.scss/,
+        test: /(src\/styles\/libs\.scss)/,
         use: [
           { loader: 'style-loader' },
           { loader: 'css-loader' },
@@ -75,7 +75,7 @@ const baseConfig = {
           { loader: 'postcss-loader', options: { sourceMap: true } },
           { loader: 'sass-loader?sourceMap' },
         ],
-        exclude: [/node_modules/, /src\/styles\/libs/],
+        exclude: [/node_modules/, /src\/styles\/libs*/],
       },
       { // sugarss
         test: /\.sss$/,

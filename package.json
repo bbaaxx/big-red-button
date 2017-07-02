@@ -10,6 +10,7 @@
     "test": "jest --config ./.jestconfig.json"
   },
   "dependencies": {
+    "hammerjs": "^2.0.8",
     "http-server": "^0.10.0",
     "material-design-icons": "^3.0.1",
     "material-design-lite": "^1.3.0",

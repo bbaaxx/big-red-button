@@ -12,19 +12,21 @@ const baseConfig = {
     jsLibs: './src/libs.js',
     styleLibs: './src/styles/libs.scss',
     main: './src/index.js',
-    styles: [
-      './src/styles/sass.scss',
-      './src/styles/sugarss.sss',
-      './src/styles/cssnext.css',
-    ],
+    // styles: [
+    //   './src/styles/sass.scss',
+    //   './src/styles/sugarss.sss',
+    //   './src/styles/cssnext.css',
+    // ],
   },
+
   output: {
     filename: '[name].[chunkhash].js',
     path: path.resolve(__dirname, '/dist'),
   },
+
   module: {
     rules: [
-      {
+      { // shims
         test: /\.shim\.js$/,
         use: ['script-loader'],
         exclude: nodeModulesPath,
@@ -49,8 +51,12 @@ const baseConfig = {
           { loader: 'babel-loader' },
         ],
       },
-      { // sass
-        test: /\.(sass|scss)$/,
+      { // mdl
+        test: require.resolve('material-design-lite/material'),
+        loader: 'exports-loader?componentHandler',
+      },
+      { // Style libs imports
+        test: /src\/styles\/libs\.scss/,
         use: [
           { loader: 'style-loader' },
           { loader: 'css-loader' },
@@ -60,9 +66,16 @@ const baseConfig = {
         ],
         exclude: /node_modules/,
       },
-      { // mdl
-        test: require.resolve('material-design-lite/material'),
-        loader: 'exports-loader?componentHandler',
+      { // sass
+        test: /\.(sass|scss)$/,
+        use: [
+          // { loader: 'style-loader' },
+          { loader: 'css-loader' },
+          { loader: 'resolve-url-loader' },
+          { loader: 'postcss-loader', options: { sourceMap: true } },
+          { loader: 'sass-loader?sourceMap' },
+        ],
+        exclude: [/node_modules/, /src\/styles\/libs/],
       },
       { // sugarss
         test: /\.sss$/,
@@ -88,9 +101,11 @@ const baseConfig = {
       },
     ],
   },
+
   resolve: {
     modules: ['node_modules'],
   },
+
   plugins: [
     new FlowBabelWebpackPlugin(),
     new HtmlWebpackPlugin(),
@@ -103,13 +118,16 @@ const baseConfig = {
       });
     },
   ],
+
   devServer: {
     contentBase: path.join(__dirname, 'dist'),
     compress: true,
     overlay: true,
     port: 3010,
   },
-  devtool: 'cheap-eval-source-map',
+
+  devtool: 'inline-source-map',
+
 };
 
 const targets = [

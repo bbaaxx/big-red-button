@@ -1,4 +1,5 @@
-/* global document, HTMLElement, Event */
+// @flow
+/* global document */
 import Hammer from 'hammerjs';
 import componentHandler from 'material-design-lite/material';
 
@@ -7,9 +8,11 @@ import styles from './styles.scss';
 
 export default class AmazingButton extends HTMLElement {
 
-  buttonElement;
-  buttonConfig;
-  hammerManager;
+  buttonElement: HTMLElement;
+  buttonConfig: any;
+  hammerManager: any;
+  attachShadow: () => mixed;
+  shadowRoot: HTMLElement;
 
   constructor() {
     super();
@@ -25,7 +28,7 @@ export default class AmazingButton extends HTMLElement {
     this.hammerManager.off('tap');
   }
 
-  dispatch(evt) {
+  dispatch(evt: Event) {
     evt.preventDefault();
     this.buttonElement.dispatchEvent(
       new Event('amazing-button-clicked', { composed: true, data: 'crazyman' }),

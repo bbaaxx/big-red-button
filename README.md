@@ -1,12 +1,11 @@
 # Webpack 2 super bloated starter kit #
 
-## >Because you just have to try everything working together for no relevant reason
+### Because sometimes I just have to try everything working together for no reason
 
 This repository contains a webpack2 configuration that includes ... well lots of
 things that I have been able to wire together to achieve the task of displaying
 a big red button (See dramatic screenshot below). The button can of course be
-pressed but you are left with the task to decide what to do when the button is
-pressed.
+pressed but you are left with the task to decide what to do when that happens.
 
 ### What you get? ###
 
@@ -21,15 +20,17 @@ pressed.
 
 ### How to set it up? ###
 
-- Use linux/mac
-- Install git
-- Install yarn
-- Clone this repo
-- `cd` in there
-- Install stuff running `yarn`
-- Run one of the following: `vim .`, `atom .`, `subl .`, or even `emacs . # I'm guessing here`
-- Run `yarn dev`. (If you are lazy enough to use this then you may want to know that if you do `yarn dev -- --open` instead, it will open your favorite browser automagically!)
-- Rejoice.
+1. Use a Linux or at least Mac operating systems.
+2. Install [Git](https://git-scm.com/) 
+3. Then install [Yarn](https://yarnpkg.com) 
+4. Now, clone this repo 
+`$ git clone <this repo>`
+5. Go and gently `$ cd <yourself in there>`.
+6. Install stuff running `$ yarn`
+7. Please use one of these (I wrote this with [Atom](https://atom.io/)): 
+`$ vim .`, `$ atom .`, `$ subl .`
+8. Run `$ yarn dev` (you can also add `-- --open` for super lazy combo).
+9. Rejoice.
 
 ### Contribution guidelines ###
 

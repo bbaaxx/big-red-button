@@ -5,8 +5,12 @@
   ],
   "parser": "babel-eslint",
   "plugins": [
-    "flowtype"
+    "flowtype",
+    "jest"
   ],
+  "env": {
+    "jest/globals": true
+  },
   "rules": {
     "no-nested-ternary": 0,
     "no-console": 0

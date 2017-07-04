@@ -6,6 +6,7 @@
   "scripts": {
     "build": "rimraf ./dist && NODE_ENV=build webpack",
     "dev": "NODE_ENV=development webpack-dev-server",
+    "devu": "NODE_ENV=development webpack-dev-server --config ./config/webpack.config.development.js",
     "start": "yarn run build && http-server ./dist/web",
     "test": "NODE_ENV=test jest --config ./.jestconfig.json"
   },
@@ -63,6 +64,7 @@
     "stylelint": "^7.10.1",
     "url-loader": "^0.5.9",
     "webpack": "^3.0.0",
+    "webpack-dashboard": "^0.4.0",
     "webpack-dev-server": "^2.4.5",
     "webpack-manifest-plugin": "^1.1.0",
     "webpack-merge": "^4.1.0"

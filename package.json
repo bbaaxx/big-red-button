@@ -4,11 +4,24 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "build": "rimraf ./dist && NODE_ENV=build webpack",
-    "dev": "NODE_ENV=development webpack-dev-server",
-    "devu": "NODE_ENV=development webpack-dev-server --config ./config/webpack.config.development.js",
-    "start": "yarn run build && http-server ./dist/web",
-    "test": "NODE_ENV=test jest --config ./.jestconfig.json"
+    "ubuild": "rimraf ./dist && NODE_ENV=build webpack --config ./config/webpack/webpack.config.development.js",
+    "udev": "webpack-dashboard -- webpack-dev-server --config ./config/webpack/webpack.config.development.js",
+    "ustart": "yarn run build && http-server ./dist/web",
+    "utest": "NODE_ENV=test jest --config ./.jestconfig.json",
+    "clean:build": "rimraf build",
+    "prebuild": "yarn run clean:build",
+    "build": "yarn run build:client && yarn run build:server",
+    "build:client": "cross-env NODE_ENV=production webpack --config ./webpack/webpack.config.production.js --progress",
+    "build:server": "cross-env NODE_ENV=production webpack --config ./webpack/webpack.config.server.js --progress",
+    "build:profile": "cross-env NODE_ENV=production webpack --config ./webpack/webpack.config.production.js --profile --json > profile.json",
+    "build:serve": "http-server build/client -p 3003 --cors -o",
+    "prestart": "yarn run clean:build",
+    "start": "webpack-dashboard -- node ./dot/server.js",
+    "test": "cross-env BABEL_ENV=commonjs jest --no-cache --config jest.config.json",
+    "test:cov": "yarn test -- --coverage",
+    "test:watch": "yarn test -- --watch",
+    "lint": "eslint config src/** --ext .js",
+    "tunnel": "lt --port 3000"
   },
   "dependencies": {
     "hammerjs": "^2.0.8",
@@ -20,6 +33,7 @@
     "webcomponentsjs": "^1.0.2"
   },
   "devDependencies": {
+    "babel-cli": "^6.24.1",
     "babel-core": "^6.24.1",
     "babel-eslint": "^7.2.3",
     "babel-jest": "^20.0.3",
@@ -30,6 +44,7 @@
     "babel-plugin-transform-es2015-classes": "^6.24.1",
     "babel-plugin-transform-es2015-destructuring": "^6.23.0",
     "babel-plugin-transform-object-rest-spread": "^6.23.0",
+    "babel-polyfill": "^6.23.0",
     "babel-preset-env": "^1.5.1",
     "babel-preset-flow": "^6.23.0",
     "buble-loader": "^0.4.1",
@@ -44,6 +59,7 @@
     "eslint-plugin-jsx-a11y": "5.0.1",
     "eslint-plugin-react": "^7.0.1",
     "exports-loader": "^0.6.4",
+    "extract-text-webpack-plugin": "^2.1.2",
     "file-loader": "^0.11.2",
     "flow": "^0.2.3",
     "flow-babel-webpack-plugin": "^1.0.1",
@@ -65,7 +81,9 @@
     "url-loader": "^0.5.9",
     "webpack": "^3.0.0",
     "webpack-dashboard": "^0.4.0",
+    "webpack-dev-middleware": "^1.11.0",
     "webpack-dev-server": "^2.4.5",
+    "webpack-hot-middleware": "^2.18.1",
     "webpack-manifest-plugin": "^1.1.0",
     "webpack-merge": "^4.1.0"
   }

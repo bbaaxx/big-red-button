@@ -9,13 +9,13 @@ const nodeModulesPath = path.resolve(__dirname, 'node_modules');
 
 const baseConfig = {
   entry: {
-    jsLibs: './src/libs.js',
-    styleLibs: './src/styles/libs.scss',
-    main: './src/index.js',
+    jsLibs: './src/client/libs.js',
+    styleLibs: './src/client/styles/libs.scss',
+    main: './src/client/index.js',
     styles: [
-      './src/styles/sass.scss',
-      './src/styles/sugarss.sss',
-      './src/styles/cssnext.css',
+      './src/client/styles/sass.scss',
+      './src/client/styles/sugarss.sss',
+      './src/client/styles/cssnext.css',
     ],
   },
 
@@ -48,7 +48,10 @@ const baseConfig = {
         test: /\.(js|jsx)$/,
         exclude: nodeModulesPath,
         use: [
-          { loader: 'babel-loader' },
+          {
+            loader: 'babel-loader',
+            query: { compact: false },
+          },
         ],
       },
       { // mdl
@@ -56,7 +59,7 @@ const baseConfig = {
         loader: 'exports-loader?componentHandler',
       },
       { // Style libs imports
-        test: /(src\/styles\/libs\.scss)/,
+        test: /src\/client\/styles\/libs\.scss/,
         use: [
           { loader: 'style-loader' },
           { loader: 'css-loader' },
@@ -75,7 +78,7 @@ const baseConfig = {
           { loader: 'postcss-loader', options: { sourceMap: true } },
           { loader: 'sass-loader?sourceMap' },
         ],
-        exclude: [/node_modules/, /src\/styles\/libs*/],
+        exclude: [/node_modules/, /src\/client\/styles\/libs*/],
       },
       { // sugarss
         test: /\.sss$/,

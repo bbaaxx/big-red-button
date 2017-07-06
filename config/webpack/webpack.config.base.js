@@ -12,7 +12,7 @@ const distPath = path.resolve(__dirname, '../../dist');
 const baseConfig = {
 
   output: {
-    filename: 'js/[name].[chunkhash].js',
+    filename: 'js/[name].[hash].js',
     path: distPath,
     publicPath: '/',
   },

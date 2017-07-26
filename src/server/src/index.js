@@ -8,7 +8,7 @@ import middleware from './middleware';
 import api from './api';
 import config from './config.json';
 
-let app = express();
+const app = express();
 app.server = http.createServer(app);
 
 // logger

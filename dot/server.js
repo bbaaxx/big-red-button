@@ -11,11 +11,12 @@ const config = require('../config/webpack/webpack.config.development');
 const app = express();
 const compiler = webpack(config);
 
+
 // Apply CLI dashboard for your webpack dev server
 compiler.apply(new DashboardPlugin());
 
 const host = process.env.HOST || 'localhost';
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3210;
 
 function log(...args) {
   const logArgs = args;

@@ -3,6 +3,7 @@ const path = require('path');
 // const webpackMerge = require('webpack-merge');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const WebpackManifestPlugin = require('webpack-manifest-plugin');
+const ServiceWorkerWebpackPlugin = require('serviceworker-webpack-plugin');
 
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
@@ -110,6 +111,9 @@ const baseConfig = {
     new ExtractTextPlugin({
       filename: 'css/[name].[contenthash].css',
     }),
+    new ServiceWorkerWebpackPlugin({
+      entry: path.join(__dirname, '../../src/client/sw.js'),
+    }),
     // why can't I use arrows ?
     function customPlugin() {
       // must reference this ?
@@ -119,12 +123,12 @@ const baseConfig = {
     },
   ],
 
-  devServer: {
-    contentBase: distPath,
-    compress: true,
-    overlay: true,
-    port: 3010,
-  },
+  // devServer: {
+  //   contentBase: distPath,
+  //   compress: true,
+  //   overlay: true,
+  //   port: 3010,
+  // },
 
 };
 

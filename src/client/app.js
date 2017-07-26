@@ -1,6 +1,6 @@
 // @flow
 /* global document */
-import AmazingButton from './app/wood/amazing-button';
+import AmazingButton from './app/wood/wcmdl-button';
 
 export const buttonsMarkup = `
   <h1>Webpack 2 super config</h1>
@@ -41,19 +41,19 @@ export const setEventListener = (elem: HTMLElement) => {
     }
   });
 };
-export const renderSomething = (elem: HTMLElement, something: any) => {
+
+export const renderApp = (elem: HTMLElement, something: any) => {
   elem.innerHTML = something;   // eslint-disable-line no-param-reassign
   const allTheButtons = document.querySelectorAll('amazing-button');
   Array.from(allTheButtons).forEach(button => setEventListener(button));
 };
-
 
 export const insertDelayedButton = (elem: HTMLElement) => {
   const delayedButton = document.createElement('amazing-button');
   delayedButton.innerText = 'Delayed Button';
   delayedButton.dataset.name = 'delayed-button';
   delayedButton.dataset.colored = 'true';
-  delayedButton.dataset.ripple = 'true';
+  delayedButton.dataset.ripple = 'false';
   setTimeout(() => {
     elem.appendChild(delayedButton);
     setEventListener(delayedButton);

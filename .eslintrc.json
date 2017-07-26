@@ -1,12 +1,27 @@
 {
+  "parser": "babel-eslint",
   "extends": [
     "airbnb",
     "plugin:flowtype/recommended"
   ],
-  "parser": "babel-eslint",
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "impliedStrict": true,
+      "experimentalObjectRestSpread": true
+    }
+  },
   "plugins": [
-    "flowtype"
+    "flowtype",
+    "jest"
   ],
+  "env": {
+    "browser": true,
+    "node": true,
+    "es6": true,
+    "jest/globals": true
+  },
   "rules": {
     "no-nested-ternary": 0,
     "no-console": 0

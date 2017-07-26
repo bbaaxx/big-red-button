@@ -6,13 +6,24 @@ import componentHandler from 'material-design-lite/material';
 import injectStyles from '../../helpers/ce-helpers/injectStyles';
 import styles from './styles.scss';
 
-export default class AmazingButton extends HTMLElement {
+export type ButtonConfig = {
+  name?: string,
+  raised?: boolean,
+  ripple?: boolean,
+  accent?: boolean,
+  colored?: boolean,
+  primary?: boolean,
+  icon?: string,
+  fab?: boolean,
+};
+
+export default class CompMdlButton extends HTMLElement {
 
   buttonElement: HTMLElement;
-  buttonConfig: any;
-  hammerManager: any;
-  attachShadow: () => mixed;
-  shadowRoot: HTMLElement;
+  buttonConfig: ButtonConfig;
+  hammerManager: () => mixed;
+  attachShadow: ({ mode: ShadowRootMode }) => ShadowRoot;
+  shadowRoot: ShadowRoot | any;
 
   constructor() {
     super();
@@ -49,15 +60,25 @@ export default class AmazingButton extends HTMLElement {
     const {
       name, raised, ripple, accent, colored, primary, icon, fab,
     } = this.buttonConfig;
-
+    console.log(this.buttonConfig);
     const button = document.createElement('button');
     const classList = [
       'mdl-button',
       'mdl-js-button',
     ];
-    button.name = name;
-    button.innerHTML = '<slot>button</slot>';
 
+    // const classSetup = {
+    //   raised: 'mdl-button--raised',
+    //   ripple: 'mdl-js-ripple-effect',
+    //   accent: 'mdl-button--accent',
+    //   colored: 'mdl-button--colored',
+    //   primary: 'mdl-button--primary',
+    // };
+
+    button.innerHTML = '<slot>button</slot>';
+    if (name) {
+      button.name = name;
+    }
     if (raised) {
       classList.push('mdl-button--raised');
     }

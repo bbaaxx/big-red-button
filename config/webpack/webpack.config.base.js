@@ -1,27 +1,21 @@
 const path = require('path');
 // const webpack = require('webpack');
-const webpackMerge = require('webpack-merge');
+// const webpackMerge = require('webpack-merge');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const WebpackManifestPlugin = require('webpack-manifest-plugin');
-const FlowBabelWebpackPlugin = require('flow-babel-webpack-plugin');
+const ServiceWorkerWebpackPlugin = require('serviceworker-webpack-plugin');
 
-const nodeModulesPath = path.resolve(__dirname, 'node_modules');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+
+const nodeModulesPath = path.resolve(__dirname, '../../node_modules');
+const distPath = path.resolve(__dirname, '../../dist');
 
 const baseConfig = {
-  entry: {
-    jsLibs: './src/client/libs.js',
-    styleLibs: './src/client/styles/libs.scss',
-    main: './src/client/index.js',
-    styles: [
-      './src/client/styles/sass.scss',
-      './src/client/styles/sugarss.sss',
-      './src/client/styles/cssnext.css',
-    ],
-  },
 
   output: {
-    filename: '[name].[chunkhash].js',
-    path: path.resolve(__dirname, '/dist'),
+    filename: 'js/[name].[hash].js',
+    path: distPath,
+    publicPath: '/',
   },
 
   module: {
@@ -48,10 +42,7 @@ const baseConfig = {
         test: /\.(js|jsx)$/,
         exclude: nodeModulesPath,
         use: [
-          {
-            loader: 'babel-loader',
-            query: { compact: false },
-          },
+          { loader: 'babel-loader' },
         ],
       },
       { // mdl
@@ -107,12 +98,22 @@ const baseConfig = {
 
   resolve: {
     modules: ['node_modules'],
+    alias: {
+      client: path.join(__dirname, '../../src/client'),
+      server: path.join(__dirname, '../../src/server'),
+    },
+    extensions: ['.js', '.json', '.scss', '.sass', '.sss', '.css'],
   },
 
   plugins: [
-    new FlowBabelWebpackPlugin(),
     new HtmlWebpackPlugin(),
     new WebpackManifestPlugin(),
+    new ExtractTextPlugin({
+      filename: 'css/[name].[contenthash].css',
+    }),
+    new ServiceWorkerWebpackPlugin({
+      entry: path.join(__dirname, '../../src/client/sw.js'),
+    }),
     // why can't I use arrows ?
     function customPlugin() {
       // must reference this ?
@@ -122,28 +123,26 @@ const baseConfig = {
     },
   ],
 
-  devServer: {
-    contentBase: path.join(__dirname, 'dist'),
-    compress: true,
-    overlay: true,
-    port: 3010,
-  },
-
-  devtool: 'inline-source-map',
+  // devServer: {
+  //   contentBase: distPath,
+  //   compress: true,
+  //   overlay: true,
+  //   port: 3010,
+  // },
 
 };
 
-const targets = [
-  // 'web', 'webworker', 'node', 'async-node', 'node-webkit', 'electron-main'
-  'web',
-].map(target => (
-  webpackMerge(baseConfig, {
-    target,
-    output: {
-      path: path.resolve(`${__dirname}/dist/${target}`),
-      filename: `[name].${target}.js`,
-    },
-  })
-));
+// const targets = [
+//   // 'web', 'webworker', 'node', 'async-node', 'node-webkit', 'electron-main'
+//   'web',
+// ].map(target => (
+//   webpackMerge(baseConfig, {
+//     target,
+//     output: {
+//       path: path.resolve(`${__dirname}/dist/${target}`),
+//       filename: `[name].${target}.js`,
+//     },
+//   })
+// ));
 
-module.exports = targets;
+module.exports = baseConfig;

@@ -3,7 +3,7 @@
 import AmazingButton from './app/wood/wcmdl-button';
 
 export const buttonsMarkup = `
-  <h1>Webpack 2 super config</h1>
+  <h1>Webpack 2 super configuration</h1>
   <p>Public demo MDL Wp2Sk</p>
   <amazing-button
     data-name="an-amazing-button"

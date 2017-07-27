@@ -64,6 +64,7 @@ export default class CompMdlButton extends HTMLElement {
     const button = document.createElement('button');
     const classList = [
       'mdl-button',
+      'mdl-buttonie',
       'mdl-js-button',
     ];
 

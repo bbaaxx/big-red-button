@@ -10,7 +10,7 @@ const rootElement = document.body.appendChild(
   document.createElement('div'),
 );
 
-const renderWrapper = () => {
+let renderWrapper = () => { //eslint-disable-line
   rootElement.innerHTML = '';
   renderApp(rootElement, buttonsMarkup);
   insertDelayedButton(rootElement);
@@ -19,8 +19,8 @@ const renderWrapper = () => {
 customElements.define('amazing-button', AmazingButton);
 
 if (module.hot && module.hot.accept) {
-  module.hot.accept('./app', (locoman) => {
-    console.log(locoman);
+  module.hot.accept('./app', (thisWeirdParam) => {
+    console.log(thisWeirdParam);
     renderWrapper();
   });
 }

@@ -2,8 +2,12 @@
 /* global document */
 import AmazingButton from './app/wood/wcmdl-button';
 
-export const buttonsMarkup = `
-  <h1>Webpack 2 super configuration</h1>
+if (!customElements.get('amazing-button')) {
+  customElements.define('amazing-button', AmazingButton);
+}
+
+export const buttonsMarkup = () => `
+  <h1>Webpack 2 super config yolotlelsi</h1>
   <p>Public demo MDL Wp2Sk</p>
   <amazing-button
     data-name="an-amazing-button"

@@ -8,6 +8,7 @@
     "udev": "webpack-dashboard -- webpack-dev-server --config ./config/webpack/webpack.config.development.js",
     "ustart": "yarn run build && http-server ./dist/web",
     "utest": "NODE_ENV=test jest --config ./.jestconfig.json",
+    "udevop": "nodemon ./dot/server.js --watch config --watch dot",
     "clean:build": "rimraf build",
     "prebuild": "yarn run clean:build",
     "build": "yarn run build:client && yarn run build:server",

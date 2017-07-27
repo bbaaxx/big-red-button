@@ -1,6 +1,4 @@
 const path = require('path');
-// const webpack = require('webpack');
-// const webpackMerge = require('webpack-merge');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const WebpackManifestPlugin = require('webpack-manifest-plugin');
 // const ServiceWorkerWebpackPlugin = require('serviceworker-webpack-plugin');
@@ -116,7 +114,7 @@ const baseConfig = {
     // }),
     // why can't I use arrows ?
     function customPlugin() {
-      // must reference this ?
+      // must I reference this ?
       this.plugin('done', () => {
         console.log('weehee');
       });
@@ -131,18 +129,5 @@ const baseConfig = {
   // },
 
 };
-
-// const targets = [
-//   // 'web', 'webworker', 'node', 'async-node', 'node-webkit', 'electron-main'
-//   'web',
-// ].map(target => (
-//   webpackMerge(baseConfig, {
-//     target,
-//     output: {
-//       path: path.resolve(`${__dirname}/dist/${target}`),
-//       filename: `[name].${target}.js`,
-//     },
-//   })
-// ));
 
 module.exports = baseConfig;

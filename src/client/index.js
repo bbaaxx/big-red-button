@@ -1,5 +1,6 @@
 // there is no flow =( because it seem to break HMR for this use case
 /* global document */
+
 // import runtime from 'serviceworker-webpack-plugin/lib/runtime';
 import { insertDelayedButton, renderApp, buttonsMarkup } from './app';
 

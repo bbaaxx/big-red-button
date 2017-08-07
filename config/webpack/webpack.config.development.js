@@ -14,39 +14,26 @@ const GLOBALS = {
 module.exports = merge(config, {
   devtool: 'source-map',
   entry: {
+    jslibs: ['client/libs.js', 'webpack-hot-middleware/client'],
+    styleLibs: ['client/styles/libs.scss', 'webpack-hot-middleware/client'],
     application: [
-      'webpack-hot-middleware/client',
       'babel-polyfill',
       'client/index.js',
+      'webpack-hot-middleware/client',
     ],
     styles: [
-      'client/styles/sass.scss',
       'client/styles/sugarss.sss',
       'client/styles/cssnext.css',
+      'webpack-hot-middleware/client',
     ],
-    jslibs: ['client/libs.js'],
-    styleLibs: ['client/styles/libs.scss'],
   },
-  // entry: {
-  //   application: [
-  //     'webpack-hot-middleware/client',
-  //     'babel-polyfill',
-  //     'client/js/index',
-  //   ],
-  //   vendor: [
-  //     'bootstrap',
-  //     '@webcomponents/webcomponentsjs/custom-elements-es5-adapter',
-  //     '@webcomponents/webcomponentsjs/webcomponents-loader',
-  //     'web-component',
-  //   ],
-  // },
   plugins: [
     new FlowBabelWebpackPlugin(),
     new webpack.LoaderOptionsPlugin({
       debug: true,
-      cache: true,
     }),
     new webpack.HotModuleReplacementPlugin(),
+    new webpack.NoEmitOnErrorsPlugin(),
     new webpack.DefinePlugin(GLOBALS),
   ],
 });

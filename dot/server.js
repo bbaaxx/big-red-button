@@ -34,9 +34,11 @@ const devMiddleware = webpackDevMiddleware(compiler, {
   historyApiFallback: true,
 });
 
+const hotMiddleware = webpackHotMiddleware(compiler);
+
 app.use(devMiddleware);
 
-app.use(webpackHotMiddleware(compiler));
+app.use(hotMiddleware);
 
 app.get('*', (req, res, next) => {
   req.url = '/index.html';

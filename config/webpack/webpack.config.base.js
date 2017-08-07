@@ -1,9 +1,7 @@
 const path = require('path');
-// const webpack = require('webpack');
-// const webpackMerge = require('webpack-merge');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const WebpackManifestPlugin = require('webpack-manifest-plugin');
-const ServiceWorkerWebpackPlugin = require('serviceworker-webpack-plugin');
+// const ServiceWorkerWebpackPlugin = require('serviceworker-webpack-plugin');
 
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
@@ -49,7 +47,7 @@ const baseConfig = {
         test: require.resolve('material-design-lite/material'),
         loader: 'exports-loader?componentHandler',
       },
-      { // Style libs imports
+      { // SASS Style libs imports
         test: /src\/client\/styles\/libs\.scss/,
         use: [
           { loader: 'style-loader' },
@@ -63,13 +61,12 @@ const baseConfig = {
       { // sass
         test: /\.(sass|scss)$/,
         use: [
-          // { loader: 'style-loader' },
           { loader: 'css-loader' },
-          { loader: 'resolve-url-loader' },
           { loader: 'postcss-loader', options: { sourceMap: true } },
-          { loader: 'sass-loader?sourceMap' },
+          { loader: 'resolve-url-loader', options: { sourceMap: true } },
+          { loader: 'sass-loader', options: { sourceMap: true, outputStyle: 'compressed' } },
         ],
-        exclude: [/node_modules/, /src\/client\/styles\/libs*/],
+        exclude: [/node_modules/, /src\/client\/styles\/libs\.scss/],
       },
       { // sugarss
         test: /\.sss$/,
@@ -88,7 +85,7 @@ const baseConfig = {
         ],
       },
       { // fonts
-        test: /\.(woff|woff2|eot|ttf|otf)$/,
+        test: /\.(woff|woff2|eot|ttf|otf|svg)$/,
         use: [
           'file-loader?name=fonts/[name].[ext]',
         ],
@@ -111,38 +108,18 @@ const baseConfig = {
     new ExtractTextPlugin({
       filename: 'css/[name].[contenthash].css',
     }),
-    new ServiceWorkerWebpackPlugin({
-      entry: path.join(__dirname, '../../src/client/sw.js'),
-    }),
+    // new ServiceWorkerWebpackPlugin({
+    //   entry: path.join(__dirname, '../../src/client/sw.js'),
+    // }),
     // why can't I use arrows ?
     function customPlugin() {
-      // must reference this ?
+      // must I reference this ?
       this.plugin('done', () => {
         console.log('weehee');
       });
     },
   ],
 
-  // devServer: {
-  //   contentBase: distPath,
-  //   compress: true,
-  //   overlay: true,
-  //   port: 3010,
-  // },
-
 };
-
-// const targets = [
-//   // 'web', 'webworker', 'node', 'async-node', 'node-webkit', 'electron-main'
-//   'web',
-// ].map(target => (
-//   webpackMerge(baseConfig, {
-//     target,
-//     output: {
-//       path: path.resolve(`${__dirname}/dist/${target}`),
-//       filename: `[name].${target}.js`,
-//     },
-//   })
-// ));
 
 module.exports = baseConfig;

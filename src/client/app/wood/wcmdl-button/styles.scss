@@ -1,7 +1,12 @@
-@import '../../../styles/font';
 @import '../../../styles/theme';
-
 @import '~material-design-lite/src/ripple/ripple';
 @import '~material-design-lite/src/button/button';
 
-.mdl-button { height: 200px; width: 200px }
+:host {
+
+}
+
+.wcmdl-button {
+  width: var(--wcmdl-button-width);
+  height: var(--wcmdl-button-height);
+}

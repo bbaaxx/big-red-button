@@ -47,7 +47,7 @@ const baseConfig = {
         test: require.resolve('material-design-lite/material'),
         loader: 'exports-loader?componentHandler',
       },
-      { // Style libs imports
+      { // SASS Style libs imports
         test: /src\/client\/styles\/libs\.scss/,
         use: [
           { loader: 'style-loader' },
@@ -61,13 +61,12 @@ const baseConfig = {
       { // sass
         test: /\.(sass|scss)$/,
         use: [
-          // { loader: 'style-loader' },
           { loader: 'css-loader' },
-          { loader: 'resolve-url-loader' },
           { loader: 'postcss-loader', options: { sourceMap: true } },
-          { loader: 'sass-loader?sourceMap' },
+          { loader: 'resolve-url-loader', options: { sourceMap: true } },
+          { loader: 'sass-loader', options: { sourceMap: true, outputStyle: 'compressed' } },
         ],
-        exclude: [/node_modules/, /src\/client\/styles\/libs*/],
+        exclude: [/node_modules/, /src\/client\/styles\/libs\.scss/],
       },
       { // sugarss
         test: /\.sss$/,
@@ -120,13 +119,6 @@ const baseConfig = {
       });
     },
   ],
-
-  // devServer: {
-  //   contentBase: distPath,
-  //   compress: true,
-  //   overlay: true,
-  //   port: 3010,
-  // },
 
 };
 

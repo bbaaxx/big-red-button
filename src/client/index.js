@@ -1,29 +1,25 @@
-// there is no flow =( because it seem to break HMR for this use case
+// @flow
 /* global document */
 
 // import runtime from 'serviceworker-webpack-plugin/lib/runtime';
 import { insertDelayedButton, renderApp, buttonsMarkup } from './app';
+import { getRootElement, clearRootElement } from './app/helpers/dom-helpers';
 
 declare var customElements;
 
-const rootElement = document.body.appendChild(
-  document.createElement('div'),
-);
-
-const renderWrapper = (targetElement) => {
-  targetElement.innerHTML = ''; //eslint-disable-line
+function renderWrapper(targetElement: HTMLElement) {
   renderApp(targetElement, buttonsMarkup());
   insertDelayedButton(targetElement);
-};
-
-if (module.hot && module.hot.accept) {
-  module.hot.accept();
-  module.hot.dispose(() => {
-    document.body.removeChild(rootElement);
-  });
 }
 
+const rootElement = getRootElement();
+
 renderWrapper(rootElement);
+
+if (module.hot) {
+  module.hot.accept();
+  module.hot.dispose(clearRootElement(rootElement));
+}
 
 // if ('serviceWorker' in navigator) {
 //   window.addEventListener('load', () => {

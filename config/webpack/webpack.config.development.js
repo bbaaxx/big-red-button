@@ -22,17 +22,15 @@ module.exports = merge(config, {
       'webpack-hot-middleware/client',
     ],
     styles: [
-      'webpack-hot-middleware/client',
       'client/styles/sugarss.sss',
       'client/styles/cssnext.css',
-      'client/styles/sass.scss',
+      'webpack-hot-middleware/client',
     ],
   },
   plugins: [
     new FlowBabelWebpackPlugin(),
     new webpack.LoaderOptionsPlugin({
       debug: true,
-      cache: true,
     }),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),

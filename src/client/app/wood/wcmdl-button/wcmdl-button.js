@@ -6,29 +6,49 @@ import componentHandler from 'material-design-lite/material';
 import injectStyles from '../../helpers/ce-helpers/injectStyles';
 import styles from './styles.scss';
 
-export type ButtonConfig = {
-  name?: string,
-  raised?: boolean,
-  ripple?: boolean,
-  accent?: boolean,
-  colored?: boolean,
-  primary?: boolean,
-  icon?: string,
-  fab?: boolean,
-};
-
 export default class CompMdlButton extends HTMLElement {
 
+  name: string;
+  icon: string;
+  accent: boolean;
+  colored: boolean;
+  fab: boolean;
+  mini: boolean;
+  primary: boolean;
+  raised: boolean;
+  ripple: boolean;
+
   buttonElement: HTMLElement;
-  buttonConfig: ButtonConfig;
   hammerManager: () => mixed;
   attachShadow: ({ mode: ShadowRootMode }) => ShadowRoot;
   shadowRoot: ShadowRoot | any;
 
+  BOOLEAN_PROPERTIES = ['accent', 'colored', 'fab', 'mini', 'primary', 'raised', 'ripple'];
+  STRING_PROPERTIES = ['name', 'icon'];
+
   constructor() {
     super();
     this.attachShadow({ mode: 'open' });
-    this.buttonConfig = { ...this.dataset };
+
+    this.BOOLEAN_PROPERTIES
+      .forEach(item => Object.defineProperty(
+        this,
+        item,
+        {
+          get: () => this.hasAttribute(item),
+          set: val => (val && this.setAttribute(item, '')) || this.removeAttribute(item),
+        },
+      ), this);
+
+    this.STRING_PROPERTIES
+      .forEach(item => Object.defineProperty(
+        this,
+        item,
+        {
+          get: () => this.hasAttribute(item) && this.getAttribute(item),
+          set: val => (val && this.setAttribute(item, val)) || this.removeAttribute(item),
+        },
+      ), this);
   }
 
   connectedCallback() {
@@ -42,12 +62,11 @@ export default class CompMdlButton extends HTMLElement {
   dispatch(evt: Event) {
     evt.preventDefault();
     this.buttonElement.dispatchEvent(
-      new Event('amazing-button-clicked', { composed: true, data: 'crazyman' }),
+      new Event('wcmdl-button-clicked', { composed: true }),
     );
   }
 
   updateButton() {
-    this.buttonConfig = { ...this.dataset };
     this.generateButtonElement();
 
     this.shadowRoot.innerHTML = '';
@@ -57,52 +76,41 @@ export default class CompMdlButton extends HTMLElement {
   }
 
   generateButtonElement() {
-    const {
-      name, raised, ripple, accent, colored, primary, icon, fab,
-    } = this.buttonConfig;
-    console.log(this.buttonConfig);
     const button = document.createElement('button');
     const classList = [
+      'wcmdl-button',
       'mdl-button',
       'mdl-js-button',
     ];
-
-    // const classSetup = {
-    //   raised: 'mdl-button--raised',
-    //   ripple: 'mdl-js-ripple-effect',
-    //   accent: 'mdl-button--accent',
-    //   colored: 'mdl-button--colored',
-    //   primary: 'mdl-button--primary',
-    // };
-
     button.innerHTML = '<slot>button</slot>';
-    if (name) {
-      button.name = name;
+    if (!this.name) {
+      button.name = 'default-wcmdl-button';
     }
-    if (raised) {
+
+    if (this.raised) {
       classList.push('mdl-button--raised');
     }
-    if (ripple) {
+    if (this.ripple) {
       classList.push('mdl-js-ripple-effect');
     }
-    if (accent) {
+    if (this.accent) {
       classList.push('mdl-button--accent');
     }
-    if (colored) {
+    if (this.colored) {
       classList.push('mdl-button--colored');
     }
-    if (primary) {
+    if (this.primary) {
       classList.push('mdl-button--primary');
     }
-    if (icon) {
+    if (this.icon) {
       classList.push('mdl-button--icon');
-      button.innerHTML = `<i class="material-icons">${icon}</i>`;
+      button.innerHTML = `<i class="material-icons">${this.icon}</i>`;
     }
-    if (fab) {
+    if (this.fab) {
       classList.push('mdl-button--fab');
-      if (fab === 'mini') {
-        classList.push('mdl-button--mini-fab');
-      }
+    }
+    if (this.mini) {
+      classList.push('mdl-button--mini-fab');
     }
 
     button.classList.add(...classList);

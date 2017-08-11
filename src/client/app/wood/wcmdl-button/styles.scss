@@ -1,9 +1,12 @@
-@import '~material-design-lite/src/color-definitions';
-@import '../../../styles/font';
 @import '../../../styles/theme';
-
-
-
-
 @import '~material-design-lite/src/ripple/ripple';
 @import '~material-design-lite/src/button/button';
+
+:host {
+
+}
+
+.wcmdl-button {
+  width: var(--wcmdl-button-width);
+  height: var(--wcmdl-button-height);
+}

@@ -1,35 +1,25 @@
-// there is no flow =( because it seem to break HMR for this use case
+// @flow
 /* global document */
+
 // import runtime from 'serviceworker-webpack-plugin/lib/runtime';
-import AmazingButton from './app/wood/wcmdl-button';
 import { insertDelayedButton, renderApp, buttonsMarkup } from './app';
+import { getRootElement, clearRootElement } from './app/helpers/dom-helpers';
 
 declare var customElements;
 
-const rootElement = document.body.appendChild(
-  document.createElement('div'),
-);
-
-const renderWrapper = () => {
-  rootElement.innerHTML = '';
-  renderApp(rootElement, buttonsMarkup);
-  insertDelayedButton(rootElement);
-};
-
-customElements.define('amazing-button', AmazingButton);
-
-if (module.hot && module.hot.accept) {
-  module.hot.accept('./app', (locoman) => {
-    console.log(locoman);
-    renderWrapper();
-  });
+function renderWrapper(targetElement: HTMLElement) {
+  renderApp(targetElement, buttonsMarkup());
+  insertDelayedButton(targetElement);
 }
 
-document.addEventListener(
-  'DOMContentLoaded',
-  renderWrapper,
-);
+const rootElement = getRootElement();
 
+renderWrapper(rootElement);
+
+if (module.hot) {
+  module.hot.accept();
+  module.hot.dispose(clearRootElement(rootElement));
+}
 
 // if ('serviceWorker' in navigator) {
 //   window.addEventListener('load', () => {

@@ -1,8 +1,8 @@
-import AmazingButton from './index';
+import WcmdlButton from './index';
 
-describe('AmazingButton Component', () => {
+describe('WcmdlButton Component', () => {
   test('Is of type HTMLElement', () => {
-    console.log(AmazingButton.register());
+    console.log(WcmdlButton.register());
     expect(true).toBe(true);
   });
 });

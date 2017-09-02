@@ -1,11 +1,11 @@
-# Big Red Button:  A Webpack 2 super bloated example
+# Big Red Button:  A Webpack 3 super bloated example
 
 ### Because I am a big fan of Rube Goldberg
 
-This repository contains a webpack2 configuration that includes ... well a large
-stack that I have been able to wire together to achieve the task of displaying
-a big red button (See dramatic screen shot below). The button only exists to be
-clicked, but you will have to decide what to do when that happens.
+This repository contains a Webpack3 configuration that includes ... well a large
+stack that I have been able to wire together to achieve the
+important task of displaying a big red button. This button exists only to be
+clicked on, but you will have the chance to decide what to do when that happens.
 
 ## What you get? ##
 
@@ -14,7 +14,7 @@ clicked, but you will have to decide what to do when that happens.
 * ES6/2017/next/over9k/whatever via Babel.
 * Sadistic eslint/flow setup (who's my little masoch?).
 * Jest for that freggin test ...
-* Sugarss/SASS/cssnext support out of the box ... simultaneously (with caveats).
+* Sugarss/SASS/cssnext support out of the box ... simultaneously (with some caveats).
 * Dockerfile that runs flow... a pain in the buttocks to get to work.
 * Material Design Lite.
 
@@ -41,7 +41,7 @@ work better.
 
 ### Who do I talk to? ###
 
-* A discord server/channel thing will be available soon.
+@bbaaxx in twitter
 
 ### License ###
 MIT

@@ -12,3 +12,28 @@ body {
   --wcmdl-button-width: 200px;
   --wcmdl-button-height: 200px;
 }
+
+.container {position: relative;}
+
+@-webkit-keyframes flashy {
+    0% {
+        background-color: Yellow;
+        opacity:1;
+    }
+    15% {
+        background-color: Orange;
+    }
+    40% {
+        background-color: Red;
+    }
+    100% {
+        background-color: #fdffff;
+    }
+}
+
+.flashy-thing {
+    -webkit-animation-name: flashy;
+    -webkit-animation-duration: 900ms;
+    -webkit-animation-iteration-count: 1;
+    -webkit-animation-timing-function: ease-in-out;
+}

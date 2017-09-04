@@ -14,3 +14,17 @@ export function getRootElement() {
     document.createElement('div'),
   );
 }
+
+export function addClass(selector: string, cssClass: string) {
+  const elements = [...document.querySelectorAll(selector)];
+  elements.forEach((element) => {
+    element.classList.add(cssClass);
+  });
+}
+
+export function removeClass(selector: string, cssClass: string) {
+  const elements = [...document.querySelectorAll(selector)];
+  elements.forEach((element) => {
+    element.classList.remove(cssClass);
+  });
+}

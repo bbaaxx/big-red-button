@@ -5,15 +5,15 @@
 This repository contains a Webpack3 configuration that includes ... well a large
 stack that I have been able to wire together to achieve the
 important task of displaying a big red button. This button exists only to be
-clicked on, but you will have the chance to decide what to do when that happens.
+clicked on, but you will have the chance to decide what to do when it happens.
 
 ## What you get? ##
 
-* A big red button.
-* Webpack2/HMR.
+* A big red button built with custom elements v1.
+* Webpack3/HMR.
 * ES6/2017/next/over9k/whatever via Babel.
 * Sadistic eslint/flow setup (who's my little masoch?).
-* Jest for that freggin test ...
+* Jest for those freggin tests ...
 * Sugarss/SASS/cssnext support out of the box ... simultaneously (with some caveats).
 * Dockerfile that runs flow... a pain in the buttocks to get to work.
 * Material Design Lite.

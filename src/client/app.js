@@ -1,7 +1,7 @@
 // @flow
 /* global document */
-import componentHandler from 'material-design-lite/material';
 import WcmdlButton from './app/wood/wcmdl-button';
+import { addClass, removeClass } from './app/helpers/dom-helpers';
 
 if (!customElements.get('wcmdl-button')) {
   customElements.define('wcmdl-button', WcmdlButton);
@@ -23,18 +23,18 @@ const setEventListener = (elem: HTMLElement) => {
     const target = evt.target;
     if (target instanceof WcmdlButton) {
       const { name } = target;
-
-      // Do something with the button click
       console.log('wcmdl-button event catched', name);
+
+      removeClass('body', 'flashy-thing');
+      setTimeout((() => addClass('body', 'flashy-thing')), 1);
     }
   });
 };
 
 export const renderApp = (elem: HTMLElement, something: any) => {
-  elem.innerHTML = something;   // eslint-disable-line no-param-reassign
+  elem.innerHTML = something; // eslint-disable-line no-param-reassign
   const allTheButtons = document.querySelectorAll('wcmdl-button');
   Array.from(allTheButtons).forEach(button => setEventListener(button));
-  componentHandler.upgradeDom();
 };
 
 export const insertDelayedButton = (elem: HTMLElement, timeout?: number = 1500) => {
@@ -44,7 +44,7 @@ export const insertDelayedButton = (elem: HTMLElement, timeout?: number = 1500) 
   buttonWrapper.classList.add('button-wrapper');
   buttonWrapper.appendChild(delayedButton);
 
-  delayedButton.innerText = 'BIG ORANGE BUTTON';
+  delayedButton.innerText = 'REGULAR ORANGE BUTTON';
   delayedButton.setAttribute('name', 'BRB-delayed');
 
   ['primary', 'raised', 'ripple']

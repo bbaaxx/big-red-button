@@ -7,7 +7,7 @@ stack that I have been able to wire together to achieve the
 important task of displaying a big red button. This button exists only to be
 clicked on, but you will have the chance to decide what to do when it happens.
 
-[![Remix on Glitch](https://cdn.glitch.com/2703baf2-b643-4da7-ab91-7ee2a2d00b5b%2Fremix-button.svg)](https://glitch.com/edit/#!/import/github/bbaaxx/big-red-button) | [![Sponsor](https://app.codesponsor.io/embed/evfM51iMuVNdWE8pxRQxnMcn/bbaaxx/big-red-button.svg)](https://app.codesponsor.io/link/evfM51iMuVNdWE8pxRQxnMcn/bbaaxx/big-red-button)
+[![Remix on Glitch](https://cdn.glitch.com/2703baf2-b643-4da7-ab91-7ee2a2d00b5b%2Fremix-button.svg)](https://glitch.com/edit/#!/import/github/bbaaxx/big-red-button)
 
 ## What you get? ##
 
@@ -47,3 +47,5 @@ work better.
 
 ### License ###
 MIT
+
+[![Sponsor](https://app.codesponsor.io/embed/evfM51iMuVNdWE8pxRQxnMcn/bbaaxx/big-red-button.svg)](https://app.codesponsor.io/link/evfM51iMuVNdWE8pxRQxnMcn/bbaaxx/big-red-button)

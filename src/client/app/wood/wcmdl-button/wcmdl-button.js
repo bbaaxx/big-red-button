@@ -6,6 +6,24 @@ import componentHandler from 'material-design-lite/material';
 import injectStyles from '../../helpers/ce-helpers/injectStyles';
 import styles from './styles.scss';
 
+const BOOLEAN_PROPS = ['accent', 'colored', 'fab', 'mini', 'primary', 'raised', 'ripple'];
+const STRING_PROPS = ['name', 'icon'];
+const MDL_CLASSES = {
+  accent: 'mdl-button--accent',
+  colored: 'mdl-button--colored',
+  fab: 'mdl-button--icon',
+  mini: 'mdl-button--icon',
+  primary: 'mdl-button--primary',
+  raised: 'mdl-button--raised',
+  ripple: 'mdl-js-ripple-effect',
+  icon: 'mdl-button--icon',
+  base: [
+    'wcmdl-button',
+    'mdl-button',
+    'mdl-js-button',
+  ],
+};
+
 export default class CompMdlButton extends HTMLElement {
   name: string;
   icon: string;
@@ -22,14 +40,11 @@ export default class CompMdlButton extends HTMLElement {
   attachShadow: ({ mode: ShadowRootMode }) => ShadowRoot;
   shadowRoot: ShadowRoot | any;
 
-  BOOLEAN_PROPERTIES = ['accent', 'colored', 'fab', 'mini', 'primary', 'raised', 'ripple'];
-  STRING_PROPERTIES = ['name', 'icon'];
-
   constructor() {
     super();
     this.attachShadow({ mode: 'open' });
 
-    this.BOOLEAN_PROPERTIES
+    BOOLEAN_PROPS
       .forEach(item => Object.defineProperty(
         this,
         item,
@@ -39,7 +54,7 @@ export default class CompMdlButton extends HTMLElement {
         },
       ), this);
 
-    this.STRING_PROPERTIES
+    STRING_PROPS
       .forEach(item => Object.defineProperty(
         this,
         item,
@@ -60,14 +75,12 @@ export default class CompMdlButton extends HTMLElement {
 
   dispatch(evt: Event) {
     evt.preventDefault();
-    this.buttonElement.dispatchEvent(
-      new Event('wcmdl-button-clicked', { composed: true }),
-    );
+    this.buttonElement
+      .dispatchEvent(new Event('wcmdl-button-clicked', { composed: true }));
   }
 
   updateButton() {
     this.generateButtonElement();
-
     this.shadowRoot.innerHTML = '';
     this.shadowRoot.appendChild(injectStyles(styles));
     this.shadowRoot.appendChild(this.buttonElement);
@@ -76,40 +89,18 @@ export default class CompMdlButton extends HTMLElement {
 
   generateButtonElement() {
     const button = document.createElement('button');
-    const classList = [
-      'wcmdl-button',
-      'mdl-button',
-      'mdl-js-button',
-    ];
+    const classList = [...MDL_CLASSES.base];
     button.innerHTML = '<slot>button</slot>';
+    BOOLEAN_PROPS.forEach((prop) => {
+      if (this.hasAttribute(prop)) {
+        classList.push(MDL_CLASSES[prop]);
+      }
+    });
     if (!this.name) {
       button.name = 'default-wcmdl-button';
     }
-
-    if (this.raised) {
-      classList.push('mdl-button--raised');
-    }
-    if (this.ripple) {
-      classList.push('mdl-js-ripple-effect');
-    }
-    if (this.accent) {
-      classList.push('mdl-button--accent');
-    }
-    if (this.colored) {
-      classList.push('mdl-button--colored');
-    }
-    if (this.primary) {
-      classList.push('mdl-button--primary');
-    }
     if (this.icon) {
-      classList.push('mdl-button--icon');
       button.innerHTML = `<i class="material-icons">${this.icon}</i>`;
-    }
-    if (this.fab) {
-      classList.push('mdl-button--fab');
-    }
-    if (this.mini) {
-      classList.push('mdl-button--mini-fab');
     }
 
     button.classList.add(...classList);

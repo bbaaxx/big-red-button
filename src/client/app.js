@@ -20,7 +20,7 @@ export const buttonsMarkup = () => `
 
 const setEventListener = (elem: HTMLElement) => {
   elem.addEventListener('wcmdl-button-clicked', (evt) => {
-    const target = evt.target;
+    const { target } = evt;
     if (target instanceof WcmdlButton) {
       const { name } = target;
       console.log('wcmdl-button event catched', name);

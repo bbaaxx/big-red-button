@@ -19,14 +19,14 @@ export const buttonsMarkup = () => `
   `;
 
 const setEventListener = (elem: HTMLElement) => {
-  elem.addEventListener('wcmdl-button-clicked', (evt) => {
+  elem.addEventListener('wcmdl-button-clicked', evt => {
     const { target } = evt;
     if (target instanceof WcmdlButton) {
       const { name } = target;
       console.log('wcmdl-button event catched', name);
 
       removeClass('body', 'flashy-thing');
-      setTimeout((() => addClass('body', 'flashy-thing')), 1);
+      setTimeout(() => addClass('body', 'flashy-thing'), 1);
     }
   });
 };
@@ -37,7 +37,10 @@ export const renderApp = (elem: HTMLElement, something: any) => {
   Array.from(allTheButtons).forEach(button => setEventListener(button));
 };
 
-export const insertDelayedButton = (elem: HTMLElement, timeout?: number = 1500) => {
+export const insertDelayedButton = (
+  elem: HTMLElement,
+  timeout?: number = 1500,
+) => {
   const buttonWrapper = h.dce('div');
   const delayedButton = h.dce('wcmdl-button');
 
@@ -47,8 +50,9 @@ export const insertDelayedButton = (elem: HTMLElement, timeout?: number = 1500) 
   delayedButton.innerText = 'REGULAR ORANGE BUTTON';
   delayedButton.setAttribute('name', 'BRB-delayed');
 
-  ['primary', 'raised', 'ripple']
-    .forEach(prop => delayedButton.setAttribute(prop, ''));
+  ['primary', 'raised', 'ripple'].forEach(prop =>
+    delayedButton.setAttribute(prop, ''),
+  );
 
   setEventListener(delayedButton);
 

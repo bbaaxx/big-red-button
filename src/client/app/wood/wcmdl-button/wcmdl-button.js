@@ -3,7 +3,7 @@
 import Hammer from 'hammerjs';
 import componentHandler from 'material-design-lite/material';
 
-import injectStyles from '../../helpers/ce-helpers/injectStyles';
+import injectStyles from '../../redstone/helpers/custom-elements/injectStyles';
 import styles from './styles.scss';
 
 const BOOLEAN_PROPS = [

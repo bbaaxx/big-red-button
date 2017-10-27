@@ -1,7 +1,7 @@
 // @flow
 /* global document */
 import WcmdlButton from './app/wood/wcmdl-button';
-import { addClass, removeClass } from './app/helpers/dom-helpers';
+import { addClass, removeClass } from './app/redstone/helpers/dom';
 
 if (!customElements.get('wcmdl-button')) {
   customElements.define('wcmdl-button', WcmdlButton);

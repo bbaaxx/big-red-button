@@ -3,7 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const WebpackManifestPlugin = require('webpack-manifest-plugin');
 // const ServiceWorkerWebpackPlugin = require('serviceworker-webpack-plugin');
 
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const nodeModulesPath = path.resolve(__dirname, '../../node_modules');
 const distPath = path.resolve(__dirname, '../../dist');
@@ -45,7 +45,10 @@ const baseConfig = {
       },
       { // mdl
         test: require.resolve('material-design-lite/material'),
-        loader: 'exports-loader?componentHandler',
+        loader: 'exports-loader',
+        options: {
+          exports: 'default componentHandler',
+        },
       },
       { // SASS Style libs imports
         test: /src\/client\/styles\/libs\.scss/,
@@ -64,7 +67,7 @@ const baseConfig = {
           { loader: 'css-loader' },
           { loader: 'postcss-loader', options: { sourceMap: true } },
           { loader: 'resolve-url-loader', options: { sourceMap: true } },
-          { loader: 'sass-loader', options: { sourceMap: true, outputStyle: 'compressed' } },
+          { loader: 'sass-loader', options: { sourceMap: true } },
         ],
         exclude: [/node_modules/, /src\/client\/styles\/libs\.scss/],
       },
@@ -86,9 +89,10 @@ const baseConfig = {
       },
       { // fonts
         test: /\.(woff|woff2|eot|ttf|otf|svg)$/,
-        use: [
-          'file-loader?name=fonts/[name].[ext]',
-        ],
+        type: 'asset/resource',
+        generator: {
+          filename: 'fonts/[name][ext]',
+        },
       },
     ],
   },
@@ -104,19 +108,19 @@ const baseConfig = {
 
   plugins: [
     new HtmlWebpackPlugin(),
-    new WebpackManifestPlugin(),
-    new ExtractTextPlugin({
+    new WebpackManifestPlugin.WebpackManifestPlugin(),
+    new MiniCssExtractPlugin({
       filename: 'css/[name].[contenthash].css',
     }),
     // new ServiceWorkerWebpackPlugin({
     //   entry: path.join(__dirname, '../../src/client/sw.js'),
     // }),
-    // why can't I use arrows ?
-    function customPlugin() {
-      // must I reference this ?
-      this.plugin('done', () => {
-        console.log('weehee');
-      });
+    {
+      apply: (compiler) => {
+        compiler.hooks.done.tap('CustomPlugin', () => {
+          console.log('weehee');
+        });
+      },
     },
   ],
 

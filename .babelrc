@@ -1,14 +1,17 @@
 {
-  "presets": ["env", "flow"],
+  "presets": [
+    ["@babel/preset-env", {
+      "targets": {
+        "browsers": ["last 2 versions", "ie >= 11"]
+      }
+    }],
+    "@babel/preset-flow"
+  ],
   "plugins": [
-    "transform-flow-comments",
-    "transform-object-rest-spread",
-    "transform-es2015-destructuring",
-    "transform-class-properties",
-    "transform-custom-element-classes",
-    "transform-es2015-classes",
-    ["babel-plugin-transform-builtin-classes", {
-      "globals": ["Array", "Error", "HTMLElement"]
-    }]
+    "@babel/plugin-transform-flow-strip-types",
+    "@babel/plugin-transform-object-rest-spread",
+    "@babel/plugin-transform-destructuring",
+    "@babel/plugin-transform-class-properties",
+    "@babel/plugin-transform-classes"
   ]
 }

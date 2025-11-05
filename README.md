@@ -1,24 +1,26 @@
-# Big Red Button:  A Webpack 3 super bloated example
+# Big Red Button:  A Webpack 5 Modern Build Example
 
 ### Because I am a big fan of Rube Goldberg
 
-This repository contains a Webpack3 configuration that includes ... well a large
+This repository contains a modern Webpack 5 configuration that includes ... well a large
 stack that I have been able to wire together to achieve the
 important task of displaying a big red button. This button exists only to be
 clicked on, but you will have the chance to decide what to do when it happens.
 
-[![Remix on Glitch](https://cdn.glitch.com/2703baf2-b643-4da7-ab91-7ee2a2d00b5b%2Fremix-button.svg)](https://glitch.com/edit/#!/import/github/bbaaxx/big-red-button)
+Recently updated with latest stable versions of all dependencies and modern tooling!
 
 ## What you get? ##
 
 * A big red button built with custom elements v1.
-* Webpack3/HMR.
-* ES6/2017/next/over9k/whatever via Babel.
-* Sadistic eslint/flow setup (who's my little masoch?).
-* Jest for those freggin tests ...
-* Sugarss/SASS/cssnext support out of the box ... simultaneously (with some caveats).
-* Dockerfile that runs flow... a pain in the buttocks to get to work.
-* Material Design Lite.
+* Webpack 5 with Hot Module Replacement (HMR).
+* Modern ES6/ES2017+ via latest Babel 7.
+* Comprehensive eslint/flow/prettier setup for code quality.
+* Jest 29 for testing with Babel integration.
+* SASS/PostCSS/cssnext support out of the box.
+* Flow type checking for safer JavaScript.
+* Material Design Lite for UI components.
+* Workbox for Progressive Web App capabilities.
+* All dependencies updated to latest stable versions (2024).
 
 ## How to set it up? ##
 
@@ -48,4 +50,8 @@ work better.
 ### License ###
 MIT
 
-[![Sponsor](https://app.codesponsor.io/embed/evfM51iMuVNdWE8pxRQxnMcn/bbaaxx/big-red-button.svg)](https://app.codesponsor.io/link/evfM51iMuVNdWE8pxRQxnMcn/bbaaxx/big-red-button)
+---
+
+### Support this project ###
+
+<a href="https://www.buymeacoffee.com/bbaaxx" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
